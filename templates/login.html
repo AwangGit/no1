@@ -3,34 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数据需求分析系统</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>登录</title>
 </head>
 <body>
 <div class="login-container">
-    <div class="login-box">
-        <div class="icon-container">
-            <img src="{{ url_for('static', filename='lock-icon.png') }}" alt="Lock Icon">
-        </div>
-        <h1>数据需求分析系统</h1>
-        <h2>登录</h2>
-        <form method="post">
-            <label for="username">用户名:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">密码:</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">登录</button>
-        </form>
+    <img src="{{ url_for('static', filename='lock-icon.png') }}" alt="Lock Icon" class="login-icon">
+    <h2 class="login-title">数据需求分析系统</h2>
+    <h3 class="login-subtitle">登录</h3>
+    <form method="post">
+        <label for="username">用户名:</label>
+        <input type="text" id="username" name="username">
+        <label for="password">密码:</label>
+        <input type="password" id="password" name="password">
+        <button type="submit">登录</button>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
         <div class="flash-messages">
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
             {% for message in messages %}
             <div class="flash-message">{{ message }}</div>
             {% endfor %}
-            {% endif %}
-            {% endwith %}
         </div>
-    </div>
+        {% endif %}
+        {% endwith %}
+    </form>
 </div>
 </body>
 </html>

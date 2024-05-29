@@ -1,84 +1,65 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f4f8;
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    background-color: #f0f4f8;
 }
 
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-}
-
-.login-box {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    width: 320px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.icon-container {
+.login-icon {
+    width: 50px;
     margin-bottom: 20px;
 }
 
-.icon-container img {
-    width: 60px;
-    height: 60px;
-}
-
-h1 {
+.login-title {
     font-size: 24px;
-    margin: 0 0 10px 0;
-    color: #007BFF;
+    color: #007bff;
+    margin-bottom: 10px;
 }
 
-h2 {
+.login-subtitle {
     font-size: 18px;
-    margin: 0 0 20px 0;
-    color: #333333;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
+    color: #333;
+    margin-bottom: 20px;
 }
 
 label {
-    font-size: 14px;
-    margin-bottom: 5px;
+    display: block;
     text-align: left;
-    color: #666666;
+    margin: 10px 0 5px;
 }
 
 input {
+    width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #cccccc;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 14px;
-    width: calc(100% - 22px);
 }
 
 button {
+    width: 100%;
     padding: 10px;
-    background: linear-gradient(to right, #007BFF, #00D4FF);
+    background-color: #007bff;
+    color: #fff;
     border: none;
     border-radius: 5px;
-    color: white;
-    font-size: 16px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 button:hover {
-    background: linear-gradient(to right, #0062CC, #00A8CC);
+    background-color: #0056b3;
 }
 
 .flash-messages {
@@ -87,8 +68,8 @@ button:hover {
 
 .flash-message {
     background-color: #28a745;
-    color: white;
+    color: #fff;
     padding: 10px;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-top: 5px;
 }
