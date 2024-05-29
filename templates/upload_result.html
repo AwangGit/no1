@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <title>Upload Result</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据需求分析系统 - 上传结果</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-<h1>File Upload Successful</h1> <!-- 标题：文件上传成功 -->
-<p>File <strong>{{ filename }}</strong> has been uploaded successfully.</p> <!-- 显示上传的文件名 -->
-<a href="{{ url_for('index') }}">Go back</a> <!-- 返回主页链接 -->
+<div class="container">
+    <h1>文件上传成功！</h1>
+    <p>文件名: {{ filename }}</p>
+    <a class="button" href="{{ url_for('upload_file') }}">继续上传</a>
+    <a class="button" href="{{ url_for('index') }}">返回首页</a>
+</div>
 </body>
 </html>

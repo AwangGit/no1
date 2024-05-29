@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <title>File Upload Web App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据需求分析系统 - 首页</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-<h1>Welcome {{ session['username'] }}</h1> <!-- 显示欢迎信息和用户名 -->
-<a href="{{ url_for('logout') }}">Logout</a> <!-- 登出链接 -->
-<h2>Uploaded Files</h2> <!-- 标题：已上传的文件 -->
-<ul>
-    <!-- 遍历文件列表并显示每个文件名 -->
-    {% for file in files %}
-    <li>{{ file }}</li>
-    {% endfor %}
-</ul>
-<a href="{{ url_for('upload_file') }}">Upload a new file</a> <!-- 链接到上传页面 -->
+<div class="container">
+    <h1>欢迎, {{ session['username'] }}</h1>
+    <h2>已上传文件</h2>
+    <ul>
+        {% for file in files %}
+        <li>{{ file }}</li>
+        {% endfor %}
+    </ul>
+    <a class="button" href="{{ url_for('upload_file') }}">上传文件</a>
+    <a class="button" href="{{ url_for('logout') }}">登出</a>
+</div>
 </body>
 </html>
