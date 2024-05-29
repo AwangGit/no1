@@ -51,7 +51,7 @@
         /* 设置文本和密码输入框的样式 */
         .login-container input[type="text"],
         .login-container input[type="password"] {
-            width: 100%; /* 宽度为100% */
+            width: calc(100% - 24px); /* 宽度为100%，减去左右内边距 */
             padding: 12px; /* 内边距 */
             margin-bottom: 20px; /* 底部外边距 */
             border: 1px solid #ddd; /* 边框 */
@@ -61,7 +61,7 @@
 
         /* 设置提交按钮的样式 */
         .login-container input[type="submit"] {
-            width: 100%; /* 宽度为100% */
+            width: calc(100% - 24px); /* 宽度为100%，减去左右内边距 */
             padding: 12px; /* 内边距 */
             background: #007bff; /* 背景颜色 */
             border: none; /* 无边框 */
