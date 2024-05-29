@@ -1,111 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数据需求分析系统</title>
     <style>
-        /* 设置整个页面的基本样式，包括背景颜色、字体和布局 */
         body {
-            display: flex; /* 使用弹性盒布局，方便垂直和水平居中 */
-            justify-content: center; /* 水平居中 */
-            align-items: center; /* 垂直居中 */
-            height: 100vh; /* 设置页面高度为视窗高度 */
-            margin: 0; /* 去除默认的页面边距 */
-            font-family: 'Arial', sans-serif; /* 设置字体 */
-            background: #f0f2f5; /* 背景颜色 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5 0%, #d0d9e8 100%);
         }
 
-        /* 设置登录容器的样式 */
         .login-container {
-            background: white; /* 背景为白色 */
-            padding: 40px; /* 内边距 */
-            border-radius: 8px; /* 圆角边框 */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 盒子阴影 */
-            width: 350px; /* 宽度 */
-            text-align: center; /* 文本居中 */
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            text-align: center;
+            position: relative;
         }
 
-        /* 设置主标题的样式 */
         .login-container h1 {
-            margin-bottom: 20px; /* 底部外边距 */
-            font-size: 24px; /* 字体大小 */
-            color: #007bff; /* 字体颜色 */
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: #007bff;
         }
 
-        /* 设置副标题的样式 */
         .login-container h2 {
-            margin-bottom: 30px; /* 底部外边距 */
-            font-size: 20px; /* 字体大小 */
-            color: #333; /* 字体颜色 */
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: #333;
         }
 
-        /* 设置表单标签的样式 */
         .login-container label {
-            display: block; /* 块级元素 */
-            text-align: left; /* 左对齐 */
-            margin-bottom: 10px; /* 底部外边距 */
-            font-weight: bold; /* 字体加粗 */
-            color: #333; /* 字体颜色 */
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
         }
 
-        /* 设置文本和密码输入框的样式 */
         .login-container input[type="text"],
         .login-container input[type="password"] {
-            width: calc(100% - 24px); /* 宽度为100%，减去左右内边距 */
-            padding: 12px; /* 内边距 */
-            margin-bottom: 20px; /* 底部外边距 */
-            border: 1px solid #ddd; /* 边框 */
-            border-radius: 4px; /* 圆角边框 */
-            box-sizing: border-box; /* 包括内边距和边框在内计算宽度 */
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
         }
 
-        /* 设置提交按钮的样式 */
         .login-container input[type="submit"] {
-            width: calc(100% - 24px); /* 宽度为100%，减去左右内边距 */
-            padding: 12px; /* 内边距 */
-            background: #007bff; /* 背景颜色 */
-            border: none; /* 无边框 */
-            border-radius: 4px; /* 圆角边框 */
-            color: white; /* 字体颜色 */
-            font-size: 16px; /* 字体大小 */
-            cursor: pointer; /* 鼠标指针 */
+            width: calc(100% - 24px);
+            padding: 12px;
+            background: linear-gradient(135deg, #007bff, #00d4ff);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
         }
 
-        /* 设置提交按钮在悬停时的样式 */
         .login-container input[type="submit"]:hover {
-            background: #0056b3; /* 悬停时的背景颜色 */
+            background: linear-gradient(135deg, #0056b3, #00a3cc);
         }
 
-        /* 设置消息框的样式 */
+        .login-container .logo {
+            position: absolute;
+            top: -40px;
+            left: calc(50% - 40px);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #007bff, #00d4ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 36px;
+        }
+
         .flash-message {
-            background: #d4edda; /* 背景颜色 */
-            color: #155724; /* 字体颜色 */
-            padding: 10px; /* 内边距 */
-            border: 1px solid #c3e6cb; /* 边框 */
-            border-radius: 4px; /* 圆角边框 */
-            margin-bottom: 15px; /* 底部外边距 */
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            margin-bottom: 15px;
         }
 
-        /* 设置错误消息框的样式 */
         .flash-message.error {
-            background: #f8d7da; /* 背景颜色 */
-            color: #721c24; /* 字体颜色 */
-            border-color: #f5c6cb; /* 边框颜色 */
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
         }
     </style>
 </head>
 <body>
 <div class="login-container">
-    <h1>数据需求分析系统</h1> <!-- 系统名称 -->
-    <h2>登录</h2> <!-- 登录标题 -->
+    <div class="logo">🔒</div>
+    <h1>数据需求分析系统</h1>
+    <h2>登录</h2>
     <form method="post">
-        <label for="username">用户名:</label> <!-- 用户名标签 -->
-        <input type="text" id="username" name="username" required> <!-- 用户名输入框 -->
-        <label for="password">密码:</label> <!-- 密码标签 -->
-        <input type="password" id="password" name="password" required> <!-- 密码输入框 -->
-        <input type="submit" value="登录"> <!-- 提交按钮 -->
+        <label for="username">用户名:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">密码:</label>
+        <input type="password" id="password" name="password" required>
+        <input type="submit" value="登录">
     </form>
-    <!-- 显示闪存消息 -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     {% for category, message in messages %}
