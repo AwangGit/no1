@@ -2,19 +2,84 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数据需求分析系统 - 上传文件</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>文件上传 - 数据需求分析系统</title>
+    <style>
+        /* 设置整个页面的样式 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e0eafc, #cfdef3); /* 渐变背景 */
+        }
+        /* 设置上传框的样式 */
+        .upload-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+            width: 300px;
+            text-align: center;
+        }
+        /* 设置标题样式 */
+        .upload-container h1 {
+            margin-bottom: 20px;
+            color: #3498db; /* 标题颜色 */
+        }
+        /* 设置文件选择框样式 */
+        .upload-container input[type="file"] {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        /* 设置按钮样式 */
+        .upload-container input[type="submit"] {
+            background: linear-gradient(to right, #3498db, #2980b9); /* 按钮渐变背景 */
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        /* 设置按钮悬停样式 */
+        .upload-container input[type="submit"]:hover {
+            background: linear-gradient(to right, #2980b9, #3498db);
+        }
+        /* 设置提示信息样式 */
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            color: white;
+            border-radius: 5px;
+        }
+        /* 成功提示的背景颜色 */
+        .success {
+            background-color: #2ecc71;
+        }
+        /* 错误提示的背景颜色 */
+        .error {
+            background-color: #e74c3c;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1>上传文件</h1>
+<div class="upload-container">
+    <h1>文件上传</h1> <!-- 页面标题 -->
     <form method="post" enctype="multipart/form-data">
-        <label for="file">选择文件:</label>
-        <input type="file" id="file" name="file" required>
-        <button type="submit">上传</button>
+        <input type="file" name="file" required> <!-- 文件选择框 -->
+        <input type="submit" value="上传"> <!-- 上传按钮 -->
     </form>
-    <a class="button" href="{{ url_for('index') }}">返回首页</a>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="message {% if '成功' in message %}success{% else %}error{% endif %}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 </div>
 </body>
 </html>

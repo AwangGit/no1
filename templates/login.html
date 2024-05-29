@@ -2,31 +2,104 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>登录</title>
+    <title>登录 - 数据需求分析系统</title>
+    <style>
+        /* 设置整个页面的样式 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e0eafc, #cfdef3); /* 渐变背景 */
+        }
+        /* 设置登录框的样式 */
+        .login-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+            width: 300px;
+            text-align: center;
+        }
+        /* 设置图标样式 */
+        .login-container img {
+            width: 50px;
+            margin-bottom: 20px;
+        }
+        /* 设置标题样式 */
+        .login-container h1 {
+            margin-bottom: 20px;
+            color: #3498db; /* 标题颜色 */
+        }
+        /* 设置标签样式 */
+        .login-container label {
+            float: left;
+            margin-bottom: 5px;
+            color: #555; /* 标签颜色 */
+        }
+        /* 设置输入框样式 */
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        /* 设置按钮样式 */
+        .login-container input[type="submit"] {
+            background: linear-gradient(to right, #3498db, #2980b9); /* 按钮渐变背景 */
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        /* 设置按钮悬停样式 */
+        .login-container input[type="submit"]:hover {
+            background: linear-gradient(to right, #2980b9, #3498db);
+        }
+        /* 设置提示信息样式 */
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            color: white;
+            border-radius: 5px;
+        }
+        /* 成功提示的背景颜色 */
+        .success {
+            background-color: #2ecc71;
+        }
+        /* 错误提示的背景颜色 */
+        .error {
+            background-color: #e74c3c;
+        }
+    </style>
 </head>
 <body>
 <div class="login-container">
-    <img src="{{ url_for('static', filename='lock-icon.png') }}" alt="Lock Icon" class="login-icon">
-    <h2 class="login-title">数据需求分析系统</h2>
-    <h3 class="login-subtitle">登录</h3>
+    <img src="{{ url_for('static', filename='lock-icon.png') }}" alt="Lock Icon"> <!-- 显示图标 -->
+    <h1>数据需求分析系统</h1> <!-- 系统标题 -->
+    <h2>登录</h2> <!-- 页面标题 -->
     <form method="post">
         <label for="username">用户名:</label>
-        <input type="text" id="username" name="username">
+        <input type="text" id="username" name="username" required>
         <label for="password">密码:</label>
-        <input type="password" id="password" name="password">
-        <button type="submit">登录</button>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="flash-messages">
-            {% for message in messages %}
-            <div class="flash-message">{{ message }}</div>
-            {% endfor %}
-        </div>
-        {% endif %}
-        {% endwith %}
+        <input type="password" id="password" name="password" required>
+        <input type="submit" value="登录">
     </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="message {% if '成功' in message %}success{% else %}error{% endif %}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 </div>
 </body>
 </html>

@@ -40,8 +40,7 @@ def index():
         files = os.listdir(app.config['UPLOAD_FOLDER'])
         # 渲染 index.html 模板，并传递文件列表
         return render_template('index.html', files=files)
-    # 如果用户未登录，重定向到登录页面并清除闪存消息
-    flash('请先登录')
+    # 如果用户未登录，重定向到登录页面
     return redirect(url_for('login'))
 
 # 定义路由，当用户访问 /login 时，执行这个函数
@@ -55,12 +54,12 @@ def login():
         if username in users and check_password_hash(users[username], password):
             # 将用户名存储在会话中，表示用户已登录
             session['username'] = username
-            # 清除之前的闪存消息
-            flash('登录成功！')
+            # 设置成功消息
+            flash('登录成功！', 'success')
             # 重定向到主页
             return redirect(url_for('index'))
         # 如果用户名或密码错误，显示错误信息
-        flash('用户名或密码错误')
+        flash('用户名或密码错误！', 'error')
     # 渲染 login.html 模板
     return render_template('login.html')
 
@@ -69,8 +68,9 @@ def login():
 def logout():
     # 从会话中删除用户名，表示用户已登出
     session.pop('username', None)
-    # 重定向到登录页面并清除闪存消息
-    flash('您已退出登录')
+    # 设置成功消息
+    flash('您已登出登录', 'success')
+    # 重定向到登录页面
     return redirect(url_for('login'))
 
 # 定义路由，当用户访问 /upload 时，执行这个函数
@@ -78,19 +78,18 @@ def logout():
 def upload_file():
     # 检查用户是否已登录
     if 'username' not in session:
-        flash('请先登录')
         return redirect(url_for('login'))
 
     if request.method == 'POST':
         # 检查请求中是否包含文件
         if 'file' not in request.files:
-            flash('没有选择文件')
+            flash('没有文件部分', 'error')
             return redirect(request.url)
 
         file = request.files['file']
         # 检查用户是否选择了文件
         if file.filename == '':
-            flash('没有选择文件')
+            flash('未选择文件', 'error')
             return redirect(request.url)
 
         # 检查文件是否符合允许的扩展名
@@ -101,14 +100,14 @@ def upload_file():
 
             # 检查文件是否已经存在
             if os.path.exists(filepath):
-                flash('文件已存在')
+                flash('文件已存在', 'error')
                 return redirect(request.url)
 
             # 保存文件到上传文件夹
             file.save(filepath)
-            flash('文件上传成功')
-            # 渲染 upload_result.html 模板，并传递文件名
-            return render_template('upload_result.html', filename=filename)
+            flash('文件上传成功', 'success')
+            # 重定向到上传页面以显示成功消息
+            return redirect(url_for('upload_file'))
 
     # 渲染 upload.html 模板
     return render_template('upload.html')
