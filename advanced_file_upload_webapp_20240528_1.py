@@ -54,10 +54,12 @@ def login():
         if username in users and check_password_hash(users[username], password):
             # 将用户名存储在会话中，表示用户已登录
             session['username'] = username
+            # 显示成功的闪存消息
+            flash('登录成功！', 'success')
             # 重定向到主页
             return redirect(url_for('index'))
         # 如果用户名或密码错误，显示错误信息
-        flash('Invalid credentials')
+        flash('用户名或密码错误！', 'error')
     # 渲染 login.html 模板
     return render_template('login.html')
 
@@ -79,13 +81,13 @@ def upload_file():
     if request.method == 'POST':
         # 检查请求中是否包含文件
         if 'file' not in request.files:
-            flash('No file part')
+            flash('No file part', 'error')
             return redirect(request.url)
 
         file = request.files['file']
         # 检查用户是否选择了文件
         if file.filename == '':
-            flash('No selected file')
+            flash('No selected file', 'error')
             return redirect(request.url)
 
         # 检查文件是否符合允许的扩展名
@@ -96,12 +98,12 @@ def upload_file():
 
             # 检查文件是否已经存在
             if os.path.exists(filepath):
-                flash('File already exists')
+                flash('File already exists', 'error')
                 return redirect(request.url)
 
             # 保存文件到上传文件夹
             file.save(filepath)
-            flash('File successfully uploaded')
+            flash('File successfully uploaded', 'success')
             # 渲染 upload_result.html 模板，并传递文件名
             return render_template('upload_result.html', filename=filename)
 
