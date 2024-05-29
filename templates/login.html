@@ -1,124 +1,34 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数据需求分析系统</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #f0f2f5 0%, #d0d9e8 100%);
-        }
-
-        .login-container {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 320px;
-            text-align: center;
-            position: relative;
-        }
-
-        .login-container .logo {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #007bff, #00d4ff);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 20px;
-            color: white;
-            font-size: 40px;
-        }
-
-        .login-container h1 {
-            margin-bottom: 10px;
-            font-size: 24px;
-            color: #007bff;
-        }
-
-        .login-container h2 {
-            margin-bottom: 20px;
-            font-size: 20px;
-            color: #333;
-        }
-
-        .login-container label {
-            display: block;
-            text-align: left;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .login-container input[type="text"],
-        .login-container input[type="password"] {
-            width: calc(100% - 24px);
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
-
-        .login-container input[type="submit"] {
-            width: calc(100% - 24px);
-            padding: 12px;
-            background: linear-gradient(135deg, #007bff, #00d4ff);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .login-container input[type="submit"]:hover {
-            background: linear-gradient(135deg, #0056b3, #00a3cc);
-        }
-
-        .flash-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 10px;
-            border: 1px solid #c3e6cb;
-            border-radius: 4px;
-            margin-bottom: 15px;
-        }
-
-        .flash-message.error {
-            background: #f8d7da;
-            color: #721c24;
-            border-color: #f5c6cb;
-        }
-    </style>
+    <title>数据需求分析系统 - 登录</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 <div class="login-container">
-    <div class="logo">🔒</div>
-    <h1>数据需求分析系统</h1>
-    <h2>登录</h2>
-    <form method="post">
-        <label for="username">用户名:</label>
-        <input type="text" id="username" name="username" required>
-        <label for="password">密码:</label>
-        <input type="password" id="password" name="password" required>
-        <input type="submit" value="登录">
-    </form>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %}
-    <div class="flash-message {{ category }}">{{ message }}</div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
+    <div class="login-box">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='lock-icon.png') }}" alt="Logo">
+        </div>
+        <h2>数据需求分析系统</h2>
+        <h3>登录</h3>
+        <form method="post" action="/login">
+            <label for="username">用户名:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">密码:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">登录</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
 </div>
 </body>
 </html>
