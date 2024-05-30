@@ -118,3 +118,4 @@ if __name__ == '__main__':
         os.makedirs(app.config['UPLOAD_FOLDER'])
     # 以调试模式运行 Flask 应用
     app.run(debug=True)
+
