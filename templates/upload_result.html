@@ -2,16 +2,37 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数据需求分析系统 - 上传结果</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>上传结果 - 数据需求分析系统</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+        }
+        .result-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .result-container h1 {
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1>文件上传成功！</h1>
-    <p>文件名: {{ filename }}</p>
-    <a class="button" href="{{ url_for('upload_file') }}">继续上传</a>
-    <a class="button" href="{{ url_for('index') }}">返回首页</a>
+<div class="result-container">
+    <h1>上传成功</h1>
+    <p>您的文件已成功上传。</p>
+    <a href="{{ url_for('index') }}">返回首页</a>
 </div>
 </body>
 </html>
+
