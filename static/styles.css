@@ -73,3 +73,22 @@ button:hover {
     border-radius: 5px;
     margin-top: 5px;
 }
+
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.flash-messages {
+    margin-top: 20px;
+}
+
+.flash-message {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
